@@ -1,0 +1,24 @@
+
+.container{
+  margin: 0 auto;
+}
+
+
+.btn{
+
+  background-color: #D2E2FD;
+  color: orange;
+  padding: 8px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  width: 49%;
+  border-radius: 12px;
+  border: 2px solid orange;
+}
+
+.btn:hover {
+  background-color: pink;
+  color: black;
+  border: 2px solid orange;

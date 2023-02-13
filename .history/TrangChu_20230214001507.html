@@ -1,0 +1,158 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Training</title>
+    <link rel="shortcut icon" href=/images/logos/Subject.png>
+	
+	<!-- jQuery -->
+    <script src="js/jquery.min.js"></script>
+	<!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <script src="js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.js"></script>
+	<!-- Poly -->
+    <link href="css/poly.css" rel="stylesheet" />
+    <script src="db/Subjects.js"></script>
+    
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+    <div class="container">
+        <header class="row">       	
+            <img src="images/banner2.jpg" class="img-thumbnail" width="100%">
+        </header>
+        <nav class="row">
+            <div class="navbar navbar-inverse">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <!--Menu-->
+                    
+                    <ul class="nav navbar-nav">
+                        <li><a href="TrangChu.html"><strong>Trang chủ</strong></a></li>
+                        <li><a href="GioiThieu.html"><strong>Giới thiệu</strong></a></li>
+                        <li><a href="LienHe.html"><strong>Liên hệ</strong></a></li>
+                        <li><a href="GopY-HoiDap.html"><strong>Góp ý - Hỏi đáp</strong></a></li>                        
+                    </ul>
+                
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#"><span class="glyphicon glyphicon-cog"></span><strong class=" title"> Tài khoản</strong></a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                                <li class="item"><a class="dropdown-item" href="DangNhap.html"><strong class="title">Đăng Nhập</strong></a></li>
+                                <li class="item"><a class="dropdown-item" href="#"><strong class="title">Quên Mật Khẩu</strong></a></li>
+                                <li class="item"><a class="dropdown-item" href="DangKy.html"><strong class="title">Đăng Ký Thành Viên</strong></a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li class="item"><a class="dropdown-item" href="#"><strong class="title">Đăng Xuất</strong></a></li>
+                                <li class="item"><a class="dropdown-item" href="DoiMatKhau.html"><strong class="title">Đổi Mật Khẩu</strong></a></li>
+                                <li class="item"><a class="dropdown-item" href="SuaThongTin.html"><strong class="title">Cập Nhật Tài Khoản</strong></a></li> 
+                            </ul>
+                        </li>
+                    </ul>
+                    
+
+                    <!--Menu-->
+                </div>
+            </div>
+        </nav>
+        <div class="poly-sheet row">
+            <script>
+                var app = angular.module("myApp",[]);
+                app.controller("myCtrl",function ($scope){
+                    $scope.lists= mon;
+                    $scope.begin=0;
+                    $scope.prev = function() {
+                        $scope.begin -=4;
+                        if ($scope.begin<0) {
+                          $scope.begin=$scope.lists.length-4;
+                        }
+                     }
+                     $scope.next = function() {
+                        $scope.begin +=4;               
+                        if ($scope.begin==$scope.lists.length) {
+                          $scope.begin=0;
+                        }
+                     }
+                     $scope.kiemtra = function(x,y) {
+                    if (typeof(Storage) !== "undefined") {              
+                    localStorage.setItem("idmon",x);
+                    localStorage.setItem("tenmon",y);                            
+                    } else {
+                    alert("Trình duyệt web của bạn không hỗ trợ storage !!!"); 
+                    }  
+             }
+                })
+            </script>
+            <article class="col-sm-9">
+                <!--Nội dung trang web-->
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div style="margin: auto">
+                            <h4><strong> MÔN HỌC PHỔ BIẾN</strong></h4>
+                        </div>
+                    <div class="panel-body">
+                    <div class="card-body">
+
+                        <div class="col-sm-6 poly-prod" ng-repeat="x in lists|limitTo:4:begin">                    
+                            <div class="panel panel-default">
+                                
+                                <div class="panel-body">
+                                    <a href="Thi.html"><img src="{{x.Logo}}" ng-click="kiemtra(x.Id,x.Name)"></a>                          
+                                </div>
+                                <div class="panel-footer">
+                                    <h5><strong>{{x.Name}}</strong></h5>
+                                </div>
+                            </div>                                     
+                        </div>  
+                    </div> 
+                    </div>
+                 </div>  
+
+                <div class="col poly-prod">
+                    <ul class="pagination">
+                        <li class="page-item"><a class="page-link" ng-click="prev()" href=""><</a></li>
+                        <li class="page-item"><a class="page-link" ng-click="next()" href="">></a></li>
+                    </ul>
+                </div>
+
+            </article>
+
+            <aside class="col-sm-3">
+                    
+                <!--/Special-->
+
+                
+                      <div class="panel panel-default">
+                        <div class="panel-heading">
+                          <h4 class="panel-title">
+                               
+                               <strong>DANH MỤC MÔN HỌC</strong>
+                          </h4>
+                        </div>
+                          <div class="panel-body">
+                                <a href="Thi.html" class="list-group-item" ng-click="kiemtra(x.Id,x.Name)" ng-repeat="x in lists">{{x.Name}}</a>
+                          </div>
+                        </div>
+                    
+
+            </aside>
+        </div>
+
+        <footer class="row">
+            <img src="images/footer.png" class="img-thumbnail" width="100%">
+            <div class="footer-copyright text-center py-3">
+                <div class="container-fluid">
+                    <h3 class="">Made with <i class="fas fa-heart red-text mx-1"></i> by ThucSkin (PD05369)</h3>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

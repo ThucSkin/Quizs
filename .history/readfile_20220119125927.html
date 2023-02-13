@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<script src="js/angular.min.js"></script>
+	<script src="db/myapp.js"></script>
+</head>
+<body ng-app="myApp">	
+	<div ng-controller = "subjectCtrl">
+		<div ng-repeat="sub in list_Subject">
+			<p>{{sub.Id}} => {{sub.Name}}</p>
+		</div>
+	</div>
+</body>
+</html>

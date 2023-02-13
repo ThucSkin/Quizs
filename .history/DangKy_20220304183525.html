@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Đăng ký tài khoản</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="js/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+	<!-- Popper JS -->
+	
+
+	<!-- Latest compiled JavaScript -->
+	<script src="js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="css/dangky.css">
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+	<div class="row" style="margin: auto; margin-top: 100px;" >
+
+		<div class="container" style="width: 400px;">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<h4 class="text-center" style=" color: red;"><strong>Đăng Ký Tài Khoản </strong></h4>
+				</div>
+				<form name="thongbao">
+					<div class="panel-body">
+					<div class="form-group">
+					  <label for="usr"><strong>Tên tài khoản:</strong></label>
+					  <input required onclick="xoa()" ng-model="student.user" name="user" type="text" class="form-control" id="usr" >
+					  <span class="badge bg-danger" id="kiemt"></span>
+					</div>
+					<div class="form-group">
+					  <label for="email"><strong>Email:</strong></label>
+					  <input required ng-model="student.email" name="email" type="email" class="form-control" id="email">
+					</div>
+					<div class="form-group">
+					  <label for="birthday"><strong>Ngày sinh:</strong></label>
+					  <input type="date" ng-model="student.date" name="date" required class="form-control" id="birthday">
+					</div>
+					<div class="form-group">
+					  <label for="pwd"><strong>Mật khẩu</strong></label>
+					  <input required ng-model="student.pass" name="mk" type="password" class="form-control" id="pwd">
+					</div>
+					<div class="form-group">
+					  <label for="address"><strong>Địa chỉ:</strong></label>
+					  <input type="text" ng-model="student.diachi" name="diachi" class="form-control" id="address">
+					</div>
+					<button class="btn btn-register" ng-disabled="thongbao.user.$invalid||thongbao.email.$invalid||thongbao.date.$invalid||thongbao.mk.$invalid||thongbao.diachi.$invalid" ng-click="signup()">Đăng Ký</button>
+					<button class="btn btn-login">Đăng Nhập</button>
+					
+				</div>
+				</form>
+		
+		</div>
+	</div>
+	</div>
+	<div>
+		<img style="width: 100%; height: 100%;position: absolute; top: 0px;z-index: -1; opacity: 0.5;" src="https://i1.wp.com/phothongcaodang.fpt.edu.vn/wp-content/uploads/Anh-co-so-dao-tao-Pho-thong-Cao-dang-FPT-Da-Nang-9.jpg?ssl=1">
+	</div>
+	<script>
+        var db = openDatabase('thai', '1.0', 'thai', 2 * 1024 * 1024);
+        db.transaction(function (tx) {                   
+            tx.executeSql('CREATE TABLE IF NOT EXISTS Students(UserName unique,Email,NgaySinh,Pass,cf_Pass,ĐiaChi)');
+            tx.executeSql('Delete from Students');
+        })  
+        function xoa() {
+                document.getElementById("kiemt").innerHTML="";
+              }      
+        var app = angular.module("myApp",[]);
+        app.controller("myCtrl",function ($scope){            
+            $scope.student={};
+            if ($scope.student.username==null){
+                document.getElementById("kiemt").innerHTML=""
+            }
+            $scope.signup = function () {
+                db.transaction(function (tx) {
+                    tx.executeSql('SELECT * FROM Students WHERE UserName=?',[$scope.student.user],function(tx,result){
+                        if (result.rows.length==1){
+                            document.getElementById("kiemt").innerHTML="UserName Đã Được Sử Dụng"
+                        } else {
+                            tx.executeSql('INSERT INTO Students(UserName,Email,NgaySinh,Pass,ĐiaChi)VALUES(?,?,?,?,?)',[$scope.student.user,$scope.student.email,$scope.student.date,$scope.student.pass,$scope.student.diachi]);
+                            alert("Đăng Ký Thành Viên Thành Công");
+                        location.assign('DangNhap.html');
+                        }
+                    })                                  
+                })               
+            }           
+        })
+    </script>
+</body>
+</html>

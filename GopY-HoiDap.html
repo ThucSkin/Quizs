@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Training</title>
+    <link rel="shortcut icon" href=/images/logos/Subject.png>
+   <!-- jQuery -->
+    <script src="js/jquery.min.js"></script>
+   <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <script src="js/bootstrap.min.js"></script>
+   
+   <!-- Poly -->
+    <link href="css/poly.css" rel="stylesheet" />
+
+
+</head>
+<body>
+    <div class="container">
+        <header class="row">
+         
+            <img src="images/banner2.jpg" class="img-thumbnail" width="100%">
+        </header>
+        <nav class="row">
+            <div class="navbar navbar-inverse">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <!--Menu-->
+                    
+                    <ul class="nav navbar-nav">
+                        <li><a href="TrangChu.html"><strong>Trang chủ</strong></a></li>
+                        <li><a href="GioiThieu.html"><strong>Giới thiệu</strong></a></li>
+                        <li><a href="LienHe.html"><strong>Liên hệ</strong></a></li>
+                        <li><a href="GopY-HoiDap.html"><strong>Góp ý - Hỏi đáp</strong></a></li>                        
+                    </ul>
+                
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#"><span class="glyphicon glyphicon-cog"></span><strong class=" title"> Tài khoản</strong></a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                                <li class="item"><a class="dropdown-item" href="DangNhap.html"><strong class="title">Đăng Nhập</strong></a></li>
+                                <li class="item"><a class="dropdown-item" href="#"><strong class="title">Quên Mật Khẩu</strong></a></li>
+                                <li class="item"><a class="dropdown-item" href="DangKy.html"><strong class="title">Đăng Ký Thành Viên</strong></a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li class="item"><a class="dropdown-item" href="#"><strong class="title">Đăng Xuất</strong></a></li>
+                                <li class="item"><a class="dropdown-item" href="DoiMatKhau.html"><strong class="title">Đổi Mật Khẩu</strong></a></li>
+                                <li class="item"><a class="dropdown-item" href="SuaThongTin.html"><strong class="title">Cập Nhật Tài Khoản</strong></a></li> 
+                            </ul>
+                        </li>
+                    </ul>
+                    <!--Menu-->
+                </div>
+            </div>
+        </nav>
+        <div class="poly-sheet row">
+
+            <article class="col">
+                <!--Nội dung trang web-->
+                <div class="panel panel-info">
+                    <div class="panel-heading" style="text-align: center;">
+                        <h4><strong>Hòm Thư Góp Ý</strong></h4>
+                    </div>
+                <div class="panel-body row">  
+                    <div class="form-group col-sm-6">
+                        <label for="usr">Họ và tên:</label>
+                        <input type="text" class="form-control" id="usr">
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="sdt">Số điện thoại:</label>
+                        <input type="number" class="form-control" id="sdt">
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="email">Email:</label>
+                        <input type="text" class="form-control" id="email">
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="adress">Địa chỉ:</label>
+                        <input type="text" class="form-control" id="adress">
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <label for="comment">Nội dung góp ý:</label>
+                        <textarea class="form-control" rows="5" id="comment"></textarea>
+                    </div>
+                    <div class="form-group col-sm-8" style="margin: auto;">
+                        <button class="btn btn-conf">Góp ý</button>
+                    </div>
+                    
+                    
+                </div>
+                </div>
+
+
+
+            </article>
+
+            
+        </div>
+
+        <footer class="row">
+            <img src="images/footer.png" class="img-thumbnail" width="100%">
+        </footer>
+    </div>
+</body>
+</html>

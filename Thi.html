@@ -1,0 +1,330 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Training</title>
+    <link rel="shortcut icon" href=/images/logos/Subject.png>
+    <!-- jQuery -->
+    <script src="js/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <script src="js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.js"></script>
+    <!-- Poly -->
+    <!-- Poly -->
+    <link href="css/poly1.css" rel="stylesheet" />
+    <script type="db/Subjects.js"></script>
+    
+    
+    <script type="text/javascript">
+            function thi (){
+                location.assign('Thi.html');
+            }
+            var app = angular.module("myApp",["ngRoute"]);
+                    app.config(function($routeProvider) {
+                $routeProvider             
+                .when("/",{
+                    template: `<center>
+                    <strong><h3>{{ten}}</h3></strong>
+                    
+                    <a href="#!show" style="color:red;text-decoration:none;"><b>Show Quizs</b></a></center>`, 
+                })
+                .when("/show",{
+                    template:`<div class="card">
+                    <h3 class="text-center">Thời gian còn lại: {{gio}} phút {{phut}} giây</h3>
+                    <div class="card-header"><img src="https://cdn-icons-png.flaticon.com/512/2222/2222807.png" width="30px"><strong>{{ten}}</strong></div>
+                    <div class="card-body" id="Cau1" ng-repeat="x in quizs|limitTo:1:start">
+                    <h5 class="card-title"><span ng-bind="socau"></span>. <span ng-bind="x.Text"></span></h5>
+                    <hr>
+                    <div class="form-check form-check-inline col-12" ng-repeat="z in x.Answers">    <input class="form-check-input" type="radio" name="answer" id="{{z.Id}}" ng-click="ktda(z.Id,x.AnswerId)">
+                    <label class="form-check-label" for="{{z.Id}}">{{z.Text}}</label>            
+                    </div>                                                                
+                    </div>
+                    <div class="card-footer"><strong>MARK: 0/10</strong></div>
+                    </div>
+                    <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">   
+                    <li class="page-item">
+                    <button class="btn" ng-disabled="9==start" ng-click="check()">Next</button>
+                    <button class="btn btn-success"><a href="#!nop" style="text-decoration: none;color: blue;"><b>Submit</b></a></button>
+                    </li>
+                    </ul>
+                    </nav>`
+                    })
+                    .when("/nop",{
+                    template:`<div class="card text-center">
+                                <div class="card-header">Kết Quả Kiểm Tra</div>
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ten}}</h5>
+                                    <h5 class="card-title">Điểm: {{mark}}/10</h5>
+                                    <a href="TrangChu.html" ng-click="reset()" class="btn btn-danger"><b>Kết thúc</b></a>
+                                   
+                                </div>
+                                <div class="card-footer text-muted">
+                                 
+                                </div>
+                              </div>`
+                    })
+                });
+                    app.controller("myCtrl",function ($scope,$interval){
+                    $scope.lists= [
+    {
+        "Id": "ADAV",
+        "Name": "Lập trình Android nâng cao",
+        "Logo": "images/logos/ADAV.jpg"
+    },
+    {
+        "Id": "ADBS",
+        "Name": "Lập trình Android cơ bản",
+        "Logo": "images/logos/ADBS.jpg"
+    },
+    {
+        "Id": "ADTE",
+        "Name": "Kiểm thử và triển khai ứng dụng Android",
+        "Logo": "images/logos/ADTE.jpg"
+    },
+    {
+        "Id": "ADUI",
+        "Name": "Thiết kế giao diện trên Android",
+        "Logo": "images/logos/ADUI.jpg"
+    },
+    {
+        "Id": "ASNE",
+        "Name": "Lập trình ASP.NET",
+        "Logo": "images/logos/ASNE.png"
+    },
+    {
+        "Id": "CLCO",
+        "Name": "Điện toán đám mây",
+        "Logo": "images/logos/CLCO.jpg"
+    },
+    {
+        "Id": "DBAV",
+        "Name": "SQL Server",
+        "Logo": "images/logos/DBAV.png"
+    },
+    {
+        "Id": "DBBS",
+        "Name": "Cơ sở dữ liệu",
+        "Logo": "images/logos/DBBS.png"
+    },
+    {
+        "Id": "GAME",
+        "Name": "Lập trình game 2D",
+        "Logo": "images/logos/GAME.png"
+    },
+    {
+        "Id": "HTCS",
+        "Name": "HTML5 và CSS3",
+        "Logo": "images/logos/HTCS.jpg"
+    },
+    {
+        "Id": "INMA",
+        "Name": "Internet Marketing",
+        "Logo": "images/logos/INMA.jpg"
+    },
+    {
+        "Id": "JAAV",
+        "Name": "Lập trình Java nâng cao",
+        "Logo": "images/logos/JAAV.png"
+    },
+    {
+        "Id": "JABS",
+        "Name": "Lập trình hướng đối tượng với Java",
+        "Logo": "images/logos/JABS.png"
+    },
+    {
+        "Id": "JSPR",
+        "Name": "Lập trình JavaScript",
+        "Logo": "images/logos/JSPR.png"
+    },
+    {
+        "Id": "LAYO",
+        "Name": "Thiết kế layout",
+        "Logo": "images/logos/LAYO.jpg"
+    },
+    {
+        "Id": "MOWE",
+        "Name": "Thiết kế web cho điện thoại di động",
+        "Logo": "images/logos/MOWE.png"
+    },
+    {
+        "Id": "PHPP",
+        "Name": "Lập trình PHP",
+        "Logo": "images/logos/PHPP.png"
+    },
+    {
+        "Id": "PMAG",
+        "Name": "Quản lý dự án với Agile",
+        "Logo": "images/logos/PMAG.jpg"
+    },
+    {
+        "Id": "VBPR",
+        "Name": "Lập trình VB.NET",
+        "Logo": "images/logos/VBPR.png"
+    },
+    {
+        "Id": "WEBU",
+        "Name": "Xây dựng trang web",
+        "Logo": "images/logos/WEBU.jpg"
+    }
+];
+                    
+                    $scope.quizs=quiz(localStorage.getItem("idmon"));;
+                    $scope.ten= localStorage.getItem("tenmon")
+                    $scope.socau=1;    
+            $scope.start=0;
+            $scope.mark=0;
+            $scope.gio = 10;
+            $scope.phut = 0;
+            $scope.tich="undefined";
+            $scope.ktda=function(x,y) {
+               $scope.tich=x;
+               $scope.answer=y;
+            }           
+            $scope.check=function(){
+                if ($scope.tich=="undefined"){
+                    lert("Vui Lòng Chọn Đáp Án");
+                }else{
+                    if ($scope.answer==$scope.tich){
+                        $scope.mark++;
+               }
+               $scope.next();
+              } 
+               
+            }
+            $scope.reset=function() {
+                $scope.tich="undefined";
+                $scope.socau=1;    
+                $scope.start=0;
+                $scope.mark=0;
+                $scope.gio = 10;
+            $scope.phut = 0;
+            }        
+            $scope.kiemtra = function(x,y) {
+                if (typeof(Storage) !== "undefined") {              
+                localStorage.setItem("idmon",x);
+                localStorage.setItem("tenmon",y);                            
+                } else {
+                alert("Trình duyệt web của bạn không hỗ trợ storage..."); 
+                }  
+            }
+            $scope.next = function (){
+                $scope.tich="undefined"
+                $scope.start++;
+                $scope.socau++;                
+                if (10==$scope.start){
+                $scope.start=0;
+                $scope.socau=1;
+                }                
+            }
+            $scope.countdown = $interval(function(){
+                $scope.phut--
+                if($scope.phut<0){
+                $scope.gio--;
+                $scope.phut=59;
+                if ($scope.gio<0){                   
+                $scope.stop();
+                $scope.gio = 0;
+                $scope.phut = 0;                   
+                }
+                }
+                 
+            }, 1000);
+            $scope.stop=function() {
+                alert("Hết THời Gian Làm Bài")
+                $interval.cancel($scope.countdown);
+              window.location.href = "#!nop"
+            }
+       })
+    </script>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+    <div class="container">
+        <header class="row">
+            
+            <img src="images/banner2.jpg" class="img-thumbnail" width="100%">
+        </header>
+        <nav class="row">
+            <div class="navbar navbar-inverse">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <!--Menu-->
+                    
+                    <ul class="nav navbar-nav">
+                        <li><a href="TrangChu.html"><strong>Trang chủ</strong></a></li>
+                        <li><a href="GioiThieu.html"><strong>Giới thiệu</strong></a></li>
+                        <li><a href="LienHe.html"><strong>Liên hệ</strong></a></li>
+                        <li><a href="GopY-HoiDap.html"><strong>Góp ý - Hỏi đáp</strong></a></li>                        
+                    </ul>
+                
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#"><span class="glyphicon glyphicon-cog"></span><strong class=" title"> Tài khoản</strong></a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                                <li class="item"><a class="dropdown-item" href="DangNhap.html"><strong class="title">Đăng Nhập</strong></a></li>
+                                <li class="item"><a class="dropdown-item" href="#"><strong class="title">Quên Mật Khẩu</strong></a></li>
+                                <li class="item"><a class="dropdown-item" href="DangKy.html"><strong class="title">Đăng Ký Thành Viên</strong></a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li class="item"><a class="dropdown-item" href="#"><strong class="title">Đăng Xuất</strong></a></li>
+                                <li class="item"><a class="dropdown-item" href="DoiMatKhau.html"><strong class="title">Đổi Mật Khẩu</strong></a></li>
+                                <li class="item"><a class="dropdown-item" href="SuaThongTin.html"><strong class="title">Cập Nhật Tài Khoản</strong></a></li> 
+                            </ul>
+                        </li>
+                    </ul>
+                    <!--Menu-->
+                </div>
+            </div>
+        </nav>
+        <div class="poly-sheet row">
+
+            <article class="col-sm-9">
+                <!--Nội dung trang web-->
+                <script src="db/Quizs/QUIZ.js"></script>
+                <div class="panel panel-primary">
+                    
+                <div class="panel-body">  
+
+                    <div ng-view>
+                        
+                    </div>                                       
+                </div>
+                
+                </div>
+
+            </article>
+
+            <aside class="col-sm-3">
+                    
+                <!--/Special-->               
+                      <div class="panel panel-default">
+                        <div class="panel-heading">
+                          <h4 class="panel-title">
+                               
+                               <strong>DANH MỤC MÔN HỌC</strong>
+                          </h4>
+                        </div>
+                          <div class="panel-body">
+                                <a href="Thi.html" class="list-group-item" ng-click="kiemtra(x.Id,x.Name)" ng-repeat="x in lists">{{x.Name}}</a>
+                          </div>
+                        </div>
+                    
+
+            </aside>
+        </div>
+
+        <footer class="row">
+            <img src="images/footer.png" class="img-thumbnail" width="100%">
+        </footer>
+    </div>
+</body>
+</html>

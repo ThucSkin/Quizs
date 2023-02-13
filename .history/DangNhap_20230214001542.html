@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Đăng ký tài khoản</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="shortcut icon" href=/images/logos/Subject.png>
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+	<!-- Popper JS -->
+	
+
+	<!-- Latest compiled JavaScript -->
+	
+	<script src="js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="css/dangky.css">
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+	<div class="row" style="margin: auto; margin-top: 200px;" >
+		<div class="container" style="width: 400px;">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<h4 class="text-center" style=" color: orange;"><strong>Đăng Nhập</strong></h4>
+				</div>
+				<form class="thongbao">
+					<div class="panel-body" style="text-align: left">
+					<div class="form-group">
+					  <label for="usr"><strong>Tên tài khoản:</strong></label>
+					  <input required onclick="tat()" ng-model="account.user" name="user"  type="text" class="form-control" id="usr">
+					  <span class="badge bg-danger" id="NoNull"></span>
+					</div>
+					<div class="form-group">
+					  <label for="pwd"><strong>Mật khẩu</strong></label>
+					  <input required onclick="tat2()" ng-model="account.pass" name="pass" type="password" class="form-control" id="pwd">
+					  <span class="badge bg-danger" id="NoNull1"></span>
+					</div>
+					<h6 style="text-align: right;"><strong>Quên mật khẩu?</strong></h6>
+					<button class="btn btn-login" ng-disabled="thongbao.user.$invalid||thongbao.pass.$invalid" ng-click="dangnhap()">Đăng Nhập</button>
+					<button class="btn btn-register"><a href="DangKy.html">Đăng Ký</a></button>
+				</div>
+				</form>
+		
+		</div>
+	</div>
+	</div>
+	<div>
+		<img style="width: 100%; height: 100%;position: absolute; top: 0px;z-index: -1; opacity: 0.5;" src="https://i1.wp.com/phothongcaodang.fpt.edu.vn/wp-content/uploads/Anh-co-so-dao-tao-Pho-thong-Cao-dang-FPT-Da-Nang-9.jpg?ssl=1">
+	</div>
+	<script>
+        var db = openDatabase('thai', '1.0', 'thai', 2 * 1024 * 1024);
+        var app = angular.module("myApp",[]);
+        function tat() {
+            document.getElementById("NoNull").innerHTML="";
+        }
+        function tat2() {
+            document.getElementById("NoNull1").innerHTML="";
+        }
+        app.controller("myCtrl",function ($scope) {
+            $scope.account={};
+            $scope.dangnhap= function(){
+                db.transaction(function(tx){
+                tx.executeSql('SELECT * FROM Students WHERE UserName=?',[$scope.account.user],function(tx,result){ 
+                	if (result.rows.length==1){
+                        if (result.rows.item(0).Pass==$scope.account.pass){
+                            alert("Đăng nhập thành công");
+                            location.assign("TrangChu.html");
+                        } else {
+                            document.getElementById("NoNull1").innerHTML="Sai Mật Khẩu"
+                        }
+                       } else {
+                        document.getElementById("NoNull").innerHTML="Tên Đăng Nhập Không Tồn Tại"
+                       }
+                })
+            })
+            }
+            
+        })
+    </script>
+</body>
+</html>
